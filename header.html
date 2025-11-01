@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    font-size: 6pt;
+    margin: 0;
+    padding: 5pt 10pt;
+    line-height: 1.4;
+  }
+  .header-container {
+    width: 100%;
+    text-align: center;
+    position: relative;
+  }
+  .logo {
+    width: 87pt;
+    height: auto;
+    display: block;
+    margin: 0 auto 3pt auto;
+  }
+  .title {
+    font-size: 8pt;
+    font-weight: bold;
+    color: #472D7B;
+    margin: 2pt 0;
+    text-decoration: underline;
+  }
+  .page-number {
+    position: absolute;
+    top: 2pt;
+    right: 10pt;
+    font-size: 6pt;
+    font-weight: normal;
+  }
+   .info-table {
+    width: 100%;
+    margin: 4pt auto 0;
+    border-collapse: collapse;
+  }
+  .info-table td {
+    padding: 1pt 0;
+    vertical-align: top;
+    white-space: nowrap;
+  }
+  .left-col {
+    text-align: left;
+    width: 50%;
+  }
+  .right-col {
+    text-align: right;
+    width: 50%;
+    line-height: 1.6;
+  }
+  .right-col span {
+    display: block;
+  }
+  .divider {
+    width: 100%;
+    margin: 6pt 0 0 0;
+    border-top: 1pt solid #000;
+  }
+  b {
+    font-weight: bold;
+  }
+</style>
+<script>
+  function subst() {
+    var vars = {};
+    var query_strings_from_url = document.location.search.substring(1).split('&');
+    for (var query_string in query_strings_from_url) {
+      if (query_strings_from_url.hasOwnProperty(query_string)) {
+        var temp_var = query_strings_from_url[query_string].split('=', 2);
+        vars[temp_var[0]] = decodeURI(temp_var[1]);
+      }
+    }
+    var css_selector_classes = ['page', 'topage', 'frompage', 'section', 'subsection'];
+    for (var css_class in css_selector_classes) {
+      if (css_selector_classes.hasOwnProperty(css_class)) {
+        var element = document.getElementsByClassName(css_selector_classes[css_class]);
+        for (var j = 0; j < element.length; ++j) {
+          element[j].textContent = vars[css_selector_classes[css_class]];
+        }
+      }
+    }
+  }
+</script>
+</head>
+<body onload="subst()">
+<div class="header-container">
+  <div class="page-number">Page <span class="page"></span> of <span class="topage"></span></div>
+  <!-- <div class="page-number">Page [page] of [topage]</div> -->
+  <img src="download.png" alt="Viatris Logo" class="logo">
+  <div class="title">Flex Field Report</div>
+
+  <table class="info-table">
+  <tr>
+    <td class="left-col">
+      <b>Division:</b> Weesp<br>
+      <b>PR ID:</b> 31471
+    </td>
+    <td class="right-col">
+      <table style="width:100%; border-collapse:collapse;">
+        <tr>
+          <td style="width:54%;"></td> <!-- ✅ Spacer cell -->
+          <td class="right-block" style="text-align:left;">
+            <b>Project:</b> Change Request<br>
+            <b>PR State:</b> Closed
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+
+
+  <div class="divider"></div>
+</div>
+</body>
+</html>
