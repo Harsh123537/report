@@ -19,10 +19,22 @@ df.reset_index(drop=True, inplace=True)
 def get_value(col):
     return df1[col].values[0] if col in df1.columns else ""
 
-pr_id = get_value("PR_ID")
-project = get_value("Project")
-pr_state = get_value("State")
-division = get_value("Division")
+pr_id = get_value("A")
+project = get_value("B")
+pr_state = get_value("C")
+division = get_value("D")
+HEADER_FILE1 = os.path.abspath("header.html").replace("\\", "/")
+def inplace_change(filename, old_string, new_string): 
+    with open(filename) as f: 
+        s = f.read() 
+    with open(filename, 'w') as f: 
+        s = s.replace(old_string, new_string) 
+        f.write(s)
+inplace_change(HEADER_FILE1,"#prid",f"{pr_id}")
+inplace_change(HEADER_FILE1,"#project",f"{project}")
+inplace_change(HEADER_FILE1,"#division",f"{division}")
+inplace_change(HEADER_FILE1,"#prstate",f"{pr_state}")
+
 
 # ------------------------------------------------------------------
 # 1. Paths (absolute = safe)
